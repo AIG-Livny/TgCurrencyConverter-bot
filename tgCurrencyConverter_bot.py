@@ -23,7 +23,6 @@ def handle_text(mes : telebot.types.Message):
     if has_numbers(mes.text):
         mlc = mes.text.lower()
         
-        #main_rule = r"(?:\d*[\.,]\d+|\d+)(\s*)"
         main_rule = r"((?:\d*[\.,]\d+|\d+)(\s*))*"
         currencies = [
             ['UAH', r"(грив|грн|грi|griv|₴)", '₴'],
