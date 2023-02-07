@@ -3,6 +3,7 @@ Telegram bot for converting currencies in groups or private messages
 
 ## Features:
 - Can seek any mention of currency and send message with converted value
+- Can seek any types: int, float, divided by spaces ("10 dollar", "10 dol", "10.8 $", "100 00 00 eur") 
 - Can work in groups or private chats
 - No need special invoking. It reed all messages an search for expression: "|number| |first chars of currency name or sign|"
 - You can add any currencies and any expression in source code at 'currencies' section

@@ -1,1 +1,5 @@
-run.bat
+*
+!.gitignore
+!tgCurrencyConverter_bot.py
+!requirements.txt
+!README.md
