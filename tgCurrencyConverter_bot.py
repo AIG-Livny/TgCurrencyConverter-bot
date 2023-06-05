@@ -30,6 +30,7 @@ def handle_text(mes : telebot.types.Message):
             ['RUB', r"(руб|rub|₽)"     , '₽'],
             ['USD', r"(дол|dol|\$)"    , '$'],
             ['KZT', r"(тен|teng|₸)"     , '₸'],
+            ['CNY', r"(юан|yua|¥)"     , '¥'],
         ]
 
         s = ''
@@ -41,7 +42,7 @@ def handle_text(mes : telebot.types.Message):
                 s = f'{n}{c[2]} = '
                 for nc in currencies:
                     if c[0] != nc[0]:
-                        s += f'{convert(curr,c[0], nc[0], n):.2f}{nc[2]}  '
+                        s += f'{convert(curr,c[0], nc[0], n):,.2f}{nc[2]}  '
                 break
         
         if s != '':
