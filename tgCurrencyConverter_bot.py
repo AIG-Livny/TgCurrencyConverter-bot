@@ -68,13 +68,15 @@ def applyMult(mult:str, n:float) -> float:
                 return n * 1000000
             if mult.startswith('milli'):
                 return n * 1000000
+            if mult.startswith('лям'):
+                return n * 1000000
     return n
 
 @bot.message_handler(content_types=["text"])
 def handle_text(mes : telebot.types.Message):
     if has_numbers(mes.text):
 
-        main_rule = r"((?:\d*[\.,]\d+|\d+)(\s*))(\s*)([КМГKGM]*|тыс*.+|косар*.+|штук*.+|мульт*.+|thou*.+|мил*.+|(млн)+|mil*.+|bil*.+|\s+)(\s*)*"
+        main_rule = r"((?:\d*[\.,]\d+|\d+)(\s*))(\s*)([КМГKGM]*|тыс*.+|косар*.+|штук*.+|мульт*.+|thou*.+|мил*.+|(млн)+|mil*.+|bil*.+|лям*.+|\s+)(\s*)*"
         currencies = [
             ['UAH', r"(грив|грн|грi|griv|₴)", '₴'],
             ['EUR', r"(евр|eur|€)"     , '€'],
