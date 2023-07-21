@@ -69,8 +69,8 @@ def handle_text(mes : telebot.types.Message):
                         mult = [value for key, value in slang_starts.items() if key in lowtext][0]
                     except IndexError:
                         mult = 1
-        
-                s = f'{n*mult}{c[2]} = '
+                n *= mult
+                s = f'{n}{c[2]} = '
                 for nc in currencies:
                     if c[0] != nc[0]:
                         s += f'{convert(curr,c[0], nc[0], n):,.2f}{nc[2]}  '
