@@ -3,6 +3,11 @@ from telebot import types,util
 import re
 import requests
 import sys
+import os
+
+whitelist = None
+if os.path.isfile('./whitelist.py'):
+    from whitelist import whitelist
 
 slang_starts = {
     'kkk'       :1000000000,
@@ -30,12 +35,12 @@ slang_starts = {
 main_rule = r"((?:\d*[\.,]\d+|\d+))\s*(\w+)*\s*"
 
 currencies = [
-            ['UAH', r"(грив|грн|грi|griv|₴)"            , '₴'],
-            ['EUR', r"(евр|eur|€)"                      , '€'],
-            ['RUB', r"(руб|rub|₽)"                      , '₽'],
-            ['USD', r"(дол|dol|бакс|бакин|bucks|\$)"    , '$'],
-            ['KZT', r"(тен|teng|тең|₸)"                 , '₸'],
-            ['CNY', r"(юан|yua|¥)"                      , '¥'],
+            ['UAH', r"(грив|грн|грi|griv|₴)"                , '₴'],
+            ['EUR', r"(евр|eur|€)"                          , '€'],
+            ['RUB', r"(руб|rub|₽)"                          , '₽'],
+            ['USD', r"(дол|dol|бакс|бакин|bucks|бачин|\$)"  , '$'],
+            ['KZT', r"(тен|teng|тең|₸)"                     , '₸'],
+            ['CNY', r"(юан|yua|¥)"                          , '¥'],
         ]
 
 bot = telebot.TeleBot(sys.argv[1])
@@ -51,6 +56,9 @@ def convert(currencies, from_currency, to_currency, amount):
 
 @bot.message_handler(content_types=["text"])
 def handle_text(mes : telebot.types.Message):
+    if whitelist and mes.from_user.id not in whitelist:
+        return
+    
     if has_numbers(mes.text):
 
         s = ''
