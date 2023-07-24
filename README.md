@@ -11,6 +11,7 @@ Telegram bot for converting currencies in groups or private messages
 - Optional whitelist of user IDs to prevent unauthorized using
 
 ## Usage:
+Add the bot into chat and open access to read all mesages. Then just use digit + currency in your message. 
 
     -Today I found 19$
     -19.0$ = 699.96₴  17.59€  1339.12₽  8702.95₸
