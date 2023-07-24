@@ -30,12 +30,12 @@ slang_starts = {
 main_rule = r"((?:\d*[\.,]\d+|\d+))\s*(\w+)*\s*"
 
 currencies = [
-            ['UAH', r"(грив|грн|грi|griv|₴)", '₴'],
-            ['EUR', r"(евр|eur|€)"          , '€'],
-            ['RUB', r"(руб|rub|₽)"          , '₽'],
-            ['USD', r"(дол|dol|\$)"         , '$'],
-            ['KZT', r"(тен|teng|₸)"         , '₸'],
-            ['CNY', r"(юан|yua|¥)"          , '¥'],
+            ['UAH', r"(грив|грн|грi|griv|₴)"            , '₴'],
+            ['EUR', r"(евр|eur|€)"                      , '€'],
+            ['RUB', r"(руб|rub|₽)"                      , '₽'],
+            ['USD', r"(дол|dol|бакс|бакин|bucks|\$)"    , '$'],
+            ['KZT', r"(тен|teng|₸)"                     , '₸'],
+            ['CNY', r"(юан|yua|¥)"                      , '¥'],
         ]
 
 bot = telebot.TeleBot(sys.argv[1])
