@@ -8,6 +8,7 @@ Telegram bot for converting currencies in groups or private messages
 - No need special invoking. It reed all messages an search for expression: "|number| |first chars of currency name or sign|"
 - You can add any currencies and any expression in source code at 'currencies' section
 - Suffixes like K, KK, M, millo, billio, thous...
+- Additional list for currencies that will not be showed in regular list currencies, but can be converted to them.
 - Optional whitelist of user IDs to prevent unauthorized using
 
 ## Usage:

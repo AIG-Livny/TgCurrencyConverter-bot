@@ -40,8 +40,13 @@ currencies = [
             ['RUB', r"(руб|rub|₽)"                          , '₽'],
             ['USD', r"(дол|dol|бакс|бакин|bucks|бачин|\$)"  , '$'],
             ['KZT', r"(тен|teng|тең|₸)"                     , '₸'],
-            ['CNY', r"(юан|yua|¥)"                          , '¥'],
         ]
+
+currencies_second = [
+            ['CNY', r"(юан|yua|¥)"                          , '¥'],
+            ['GBP', r"(фунт|pound|£)"                       , '£'],
+            ['TRY', r"(лир|lir|₺)"                          , '₺'],
+]
 
 bot = telebot.TeleBot(sys.argv[1])
 
@@ -62,7 +67,7 @@ def handle_text(mes : telebot.types.Message):
     if has_numbers(mes.text):
 
         s = ''
-        for c in currencies:
+        for c in currencies + currencies_second:
             res = re.search(main_rule + c[1], mes.text, re.IGNORECASE)
             if res:
                 curr = requests.get('https://api.exchangerate-api.com/v4/latest/USD').json()['rates']
