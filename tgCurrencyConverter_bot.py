@@ -46,7 +46,7 @@ currencies_second = [
             ['CNY', r"(юан|yua|¥)"                          , '¥'],
             ['GBP', r"(фунт|pound|£)"                       , '£'],
             ['TRY', r"(лир|lir|₺)"                          , '₺'],
-            ['JPY', r"(иен|йен|yen|¥)"                          , '₺'],
+            ['JPY', r"(иен|йен|yen|¥)"                      , '¥'],
 ]
 
 bot = telebot.TeleBot(sys.argv[1])
