@@ -71,7 +71,16 @@ def handle_text(mes : telebot.types.Message):
         for c in currencies + currencies_second:
             res = re.search(main_rule + c[1], mes.text, re.IGNORECASE)
             if res:
-                curr = requests.get('https://api.exchangerate-api.com/v4/latest/USD').json()['rates']
+                try:
+                    curr = requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5).json()['rates']
+                except requests.exceptions.Timeout:
+                    bot.send_message(mes.chat.id, 'api.exchangerate-api.com request timeout')
+                    return
+                except Exception as e:
+                    bot.send_message(mes.chat.id, f'Error: {e}')
+                    return
+
+
                 try:
                     n = float(res[1])
                 except ValueError:
