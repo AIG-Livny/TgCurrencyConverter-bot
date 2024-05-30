@@ -39,7 +39,7 @@ currencies = [
             ['EUR', r"(евр|eur|€)"                          , '€'],
             ['RUB', r"(руб|rub|₽)"                          , '₽'],
             ['USD', r"(дол|dol|бакс|бакин|bucks|бачин|\$)"  , '$'],
-            ['KZT', r"(тен|teng|тең|₸)"                     , '₸'],
+            ['KZT', r"(тен|тэн|teng|тең|₸)"                 , '₸'],
         ]
 
 currencies_second = [
@@ -54,17 +54,17 @@ bot = telebot.TeleBot(sys.argv[1])
 def has_numbers(inputString):
     return any(char.isdigit() for char in inputString)
 
-def convert(currencies, from_currency, to_currency, amount): 
-    if from_currency != 'USD' : 
-        amount = amount / currencies[from_currency] 
-    amount = round(amount * currencies[to_currency], 4) 
+def convert(currencies, from_currency, to_currency, amount):
+    if from_currency != 'USD' :
+        amount = amount / currencies[from_currency]
+    amount = round(amount * currencies[to_currency], 4)
     return amount
 
 @bot.message_handler(content_types=["text"])
 def handle_text(mes : telebot.types.Message):
     if whitelist and mes.from_user.id not in whitelist:
         return
-    
+
     if has_numbers(mes.text):
 
         s = ''
@@ -82,7 +82,7 @@ def handle_text(mes : telebot.types.Message):
 
 
                 try:
-                    n = float(res[1])
+                    n = float(res[1].replace(',','.'))
                 except ValueError:
                     break
                 mult = 1
@@ -92,15 +92,15 @@ def handle_text(mes : telebot.types.Message):
                         mult = [value for key, value in slang_starts.items() if key in lowtext][0]
                     except IndexError:
                         return
-                    
+
                 n *= mult
                 s = f'{n}{c[2]} = '
                 for nc in currencies:
                     if c[0] != nc[0]:
                         s += f'{convert(curr,c[0], nc[0], n):,.2f}{nc[2]}  '
                 break
-        
+
         if s != '':
             bot.send_message(mes.chat.id, s)
-    
+
 bot.infinity_polling(allowed_updates=util.update_types)
