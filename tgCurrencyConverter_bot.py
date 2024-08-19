@@ -60,16 +60,22 @@ def convert(currencies, from_currency, to_currency, amount):
     amount = round(amount * currencies[to_currency], 4)
     return amount
 
-@bot.message_handler(content_types=["text"])
+@bot.message_handler(content_types=["text","photo"])
 def handle_text(mes : telebot.types.Message):
     if whitelist and mes.from_user.id not in whitelist:
         return
-
-    if has_numbers(mes.text):
+    
+    if mes.content_type == 'text':
+        text = mes.text
+    
+    if mes.content_type == 'photo':
+        text = mes.caption
+     
+    if has_numbers(text):
 
         s = ''
         for c in currencies + currencies_second:
-            res = re.search(main_rule + c[1], mes.text, re.IGNORECASE)
+            res = re.search(main_rule + c[1], text, re.IGNORECASE)
             if res:
                 try:
                     curr = requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5).json()['rates']
